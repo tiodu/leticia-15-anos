@@ -15,17 +15,25 @@
 <body>
 
 <!-- Ambient layers -->
+<div class="nebula" aria-hidden="true">
+  <span class="nebula-blob--1"></span>
+  <span class="nebula-blob--2"></span>
+  <span class="nebula-blob--3"></span>
+</div>
 <div class="sky" aria-hidden="true">
+  <div class="dust"></div>
   <div class="sparkles"></div>
 </div>
+<div class="companion-butterfly" id="companionButterfly" aria-hidden="true"></div>
+<div class="sparkle-trail" id="sparkleTrail" aria-hidden="true"></div>
 
 <main class="card">
 
   <!-- HERO -->
   <section class="panel hero" id="hero">
     <div class="ornament ornament--top" aria-hidden="true">
-      <img class="ornament-butterfly ornament-butterfly--1" src="assets/butterflies/borboleta-prata.png" alt="" loading="lazy">
-      <img class="ornament-butterfly ornament-butterfly--2" src="assets/butterflies/borboleta-prata.png" alt="" loading="lazy">
+      <div class="flap-butterfly flap-pos--hero-1" data-phase="0"></div>
+      <div class="flap-butterfly flap-pos--hero-2" data-phase="11"></div>
     </div>
 
     <p class="eyebrow reveal">você está convidado para</p>
@@ -44,6 +52,9 @@
 
   <!-- COUNTDOWN -->
   <section class="panel countdown-panel" id="countdown-section">
+    <div class="ornament" aria-hidden="true">
+      <div class="flap-butterfly flap-pos--mid-1" data-phase="6"></div>
+    </div>
     <p class="eyebrow reveal">contagem regressiva</p>
     <div class="countdown reveal" data-delay="1" id="countdown" role="timer" aria-live="off">
       <div class="countdown-unit">
@@ -71,6 +82,9 @@
 
   <!-- DETAILS -->
   <section class="panel details-panel">
+    <div class="ornament" aria-hidden="true">
+      <div class="flap-butterfly flap-pos--mid-2" data-phase="20"></div>
+    </div>
 
     <div class="detail-block reveal">
       <p class="eyebrow">quando</p>
@@ -102,8 +116,8 @@
   <!-- RSVP -->
   <section class="panel rsvp-panel" id="rsvp">
     <div class="ornament ornament--bottom" aria-hidden="true">
-      <img class="ornament-butterfly ornament-butterfly--3" src="assets/butterflies/borboleta-azul.png" alt="" loading="lazy">
-      <img class="ornament-butterfly ornament-butterfly--4" src="assets/butterflies/borboleta-azul.png" alt="" loading="lazy">
+      <div class="flap-butterfly flap-pos--rsvp-1" data-phase="16"></div>
+      <div class="flap-butterfly flap-pos--rsvp-2" data-phase="27"></div>
     </div>
     <p class="eyebrow reveal">confirmação</p>
     <p class="rsvp-line reveal" data-delay="1">Sua presença é o presente<br>que mais desejo.</p>
@@ -122,6 +136,7 @@
 
 </main>
 
+<script src="js/butterfly-flap.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

@@ -10,6 +10,7 @@
   --silver:      #cdd8ec;
   --silver-bright:#f6f8fd;
   --glow:        #9fc4f5;
+  --pink-glow:   #e3b3e0;
   --gold-hair:   rgba(246,248,253,0.35);
 
   --font-script: 'Alex Brush', cursive;
@@ -59,6 +60,62 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
   );
   mix-blend-mode:overlay;
 }
+/* Soft magical nebula — large blurred color blobs drifting behind everything */
+.nebula{
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  overflow:hidden;
+  mix-blend-mode:screen;
+  opacity:.8;
+}
+.nebula span{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(48px);
+  will-change:transform;
+}
+.nebula-blob--1{
+  width:34rem; height:34rem;
+  top:-8%; left:-12%;
+  background:radial-gradient(circle, rgba(122,168,230,.32), transparent 68%);
+  animation:nebula-drift-a 26s ease-in-out infinite alternate;
+}
+.nebula-blob--2{
+  width:30rem; height:30rem;
+  bottom:-10%; right:-10%;
+  background:radial-gradient(circle, rgba(227,179,224,.28), transparent 68%);
+  animation:nebula-drift-b 32s ease-in-out infinite alternate;
+}
+.nebula-blob--3{
+  width:24rem; height:24rem;
+  top:38%; right:6%;
+  background:radial-gradient(circle, rgba(159,196,245,.22), transparent 70%);
+  animation:nebula-drift-a 22s ease-in-out infinite alternate-reverse;
+}
+@keyframes nebula-drift-a{
+  0%{ transform:translate(0,0) scale(1); }
+  100%{ transform:translate(4%,6%) scale(1.12); }
+}
+@keyframes nebula-drift-b{
+  0%{ transform:translate(0,0) scale(1); }
+  100%{ transform:translate(-5%,-4%) scale(1.15); }
+}
+
+/* Diffuse magical dust — soft, larger, colored specks (distinct from the sharp sparkle stars) */
+.dust{ position:absolute; inset:0; }
+.dust span{
+  position:absolute;
+  border-radius:50%;
+  animation:dust-float ease-in-out infinite;
+}
+.dust span.dust--blue{ background:radial-gradient(circle, rgba(159,196,245,.55) 0%, transparent 72%); }
+.dust span.dust--pink{ background:radial-gradient(circle, rgba(227,179,224,.5) 0%, transparent 72%); }
+@keyframes dust-float{
+  0%,100%{ transform:translate(0,0); opacity:.15; }
+  50%{ transform:translate(var(--dust-dx,10px), calc(-1 * var(--dust-dy,16px))); opacity:.6; }
+}
+
 .sparkles{ position:absolute; inset:0; }
 .sparkles span{
   position:absolute;
@@ -73,11 +130,32 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
   50%{ opacity:.85; transform:scale(1.6); }
 }
 
-/* ============================================
-   Ornamental butterflies (hero + rsvp bookends only)
-   ============================================ */
-.ornament-butterfly{
+/* Bigger 8-point glimmer stars, layered over the plain twinkle dots */
+.sparkles .sparkle-star{
   position:absolute;
+  width:12px; height:12px;
+  background:radial-gradient(circle, var(--silver-bright) 0%, var(--glow) 45%, transparent 75%);
+  clip-path:polygon(50% 0%, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0% 50%, 39% 39%);
+  opacity:0;
+  animation:star-twinkle 3.6s ease-in-out infinite;
+}
+.sparkles .sparkle-star--blue{
+  background:radial-gradient(circle, var(--silver-bright) 0%, var(--glow) 50%, transparent 75%);
+}
+.sparkles .sparkle-star--pink{
+  background:radial-gradient(circle, var(--silver-bright) 0%, var(--pink-glow) 50%, transparent 75%);
+}
+@keyframes star-twinkle{
+  0%,100%{ opacity:0; transform:scale(.3) rotate(0deg); }
+  50%{ opacity:.95; transform:scale(1) rotate(45deg); }
+}
+
+/* ============================================
+   Flipbook butterflies (real wing-flap frame sequence)
+   ============================================ */
+.flap-butterfly{
+  position:absolute;
+  pointer-events:none;
   filter:drop-shadow(0 6px 14px rgba(0,0,0,.35));
   opacity:0;
   animation:
@@ -85,21 +163,18 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
     bf-drift var(--bf-dur, 7s) ease-in-out infinite;
   animation-delay:var(--bf-appear, 0s), var(--bf-appear, 0s);
   will-change:transform;
-  pointer-events:none;
 }
 
-.ornament-butterfly--1{ width:72px; top:2%;  right:2%;  --bf-dur:7.5s; --bf-appear:.2s; }
-.ornament-butterfly--2{ width:34px; top:15%; right:16%; --bf-dur:6s;   --bf-appear:.6s; animation-name:bf-enter-mirror, bf-drift-mirror; }
-.ornament-butterfly--3{ width:76px; bottom:4%; left:1%;  --bf-dur:8s;   --bf-appear:.2s; filter:hue-rotate(-6deg) saturate(1.1) drop-shadow(0 0 10px rgba(80,160,255,.25)); }
-.ornament-butterfly--4{ width:32px; bottom:17%; left:14%; --bf-dur:6.5s; --bf-appear:.6s; filter:hue-rotate(-6deg) saturate(1.1) drop-shadow(0 0 10px rgba(80,160,255,.25)); animation-name:bf-enter-mirror, bf-drift-mirror; }
+.flap-pos--hero-1{ width:74px; height:74px; top:2%;  right:2%;  --bf-dur:7.5s; --bf-appear:.2s; --bf-opacity:.95; }
+.flap-pos--hero-2{ width:36px; height:36px; top:15%; right:16%; --bf-dur:6s;   --bf-appear:.6s; --bf-opacity:.85; }
+.flap-pos--rsvp-1{ width:78px; height:78px; bottom:4%; left:1%;  --bf-dur:8s;   --bf-appear:.2s; --bf-opacity:.95; }
+.flap-pos--rsvp-2{ width:34px; height:34px; bottom:17%; left:14%; --bf-dur:6.5s; --bf-appear:.6s; --bf-opacity:.85; }
+.flap-pos--mid-1{ width:26px; height:26px; top:5%; left:4%;    --bf-dur:7s;   --bf-appear:.3s; --bf-opacity:.5; }
+.flap-pos--mid-2{ width:24px; height:24px; bottom:7%; right:5%; --bf-dur:7.8s; --bf-appear:.3s; --bf-opacity:.45; }
 
 @keyframes bf-enter{
   from{ opacity:0; transform:translateY(14px) scale(.85); }
-  to{ opacity:.92; transform:translateY(0) scale(1); }
-}
-@keyframes bf-enter-mirror{
-  from{ opacity:0; transform:scaleX(-1) translateY(14px) scale(.85); }
-  to{ opacity:.8; transform:scaleX(-1) translateY(0) scale(1); }
+  to{ opacity:var(--bf-opacity, .9); transform:translateY(0) scale(1); }
 }
 @keyframes bf-drift{
   0%,100%{ transform:translate(0,0) rotate(0deg); }
@@ -107,11 +182,43 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
   50%{ transform:translate(-4px,-4px) rotate(3deg); }
   75%{ transform:translate(-8px,-14px) rotate(-2deg); }
 }
-@keyframes bf-drift-mirror{
-  0%,100%{ transform:scaleX(-1) translate(0,0) rotate(0deg); }
-  25%{ transform:scaleX(-1) translate(6px,-10px) rotate(-4deg); }
-  50%{ transform:scaleX(-1) translate(-4px,-4px) rotate(3deg); }
-  75%{ transform:scaleX(-1) translate(-8px,-14px) rotate(-2deg); }
+
+/* Persistent companion — stays anchored to the viewport as the guest scrolls */
+.companion-butterfly{
+  position:fixed;
+  top:13%;
+  right:6%;
+  width:54px;
+  height:54px;
+  z-index:3;
+  pointer-events:none;
+  filter:drop-shadow(0 6px 16px rgba(0,0,0,.45));
+  opacity:0;
+  --bf-opacity:.95;
+  animation:
+    bf-enter 1s var(--ease) 1.4s forwards,
+    bf-drift 6.5s ease-in-out 1.4s infinite;
+}
+
+/* Sparkle dust trailing the companion */
+.sparkle-trail{
+  position:fixed;
+  inset:0;
+  z-index:2;
+  pointer-events:none;
+  overflow:hidden;
+}
+.sparkle-trail .sparkle-particle{
+  position:absolute;
+  width:8px; height:8px;
+  background:radial-gradient(circle, var(--silver-bright) 0%, var(--glow) 50%, transparent 75%);
+  clip-path:polygon(50% 0%, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0% 50%, 39% 39%);
+  animation:sparkle-pop .9s ease-out forwards;
+}
+@keyframes sparkle-pop{
+  0%{ opacity:0; transform:scale(.2) translateY(0); }
+  30%{ opacity:.95; transform:scale(1) translateY(-4px); }
+  100%{ opacity:0; transform:scale(.5) translateY(-18px); }
 }
 
 /* ============================================
@@ -415,10 +522,13 @@ main.card{
 
 @media (prefers-reduced-motion: reduce){
   html{ scroll-behavior:auto; }
-  .signature{ animation:none; background-position:0 0; }
-  .butterfly{ animation:bf-enter .6s forwards; }
+  .signature{ animation:none; background-position:50% 0; }
+  .flap-butterfly, .companion-butterfly{ animation:bf-enter .6s forwards; }
   .scroll-cue span{ animation:none; opacity:.8; }
   .btn-primary{ animation:none; }
-  .sparkles span{ animation:none; opacity:.4; }
+  .sparkles span, .sparkles .sparkle-star{ animation:none; opacity:.3; }
+  .sparkle-trail{ display:none; }
+  .nebula span{ animation:none; }
+  .dust span{ animation:none; opacity:.25; }
   .reveal{ transition-duration:.25s; }
 }

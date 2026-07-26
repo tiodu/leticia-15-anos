@@ -22,6 +22,93 @@
     host.appendChild(frag);
   }
 
+  function buildStarSparkles(){
+    const host = document.querySelector('.sparkles');
+    if (!host || prefersReducedMotion) return;
+    const tints = ['', 'sparkle-star--blue', 'sparkle-star--pink'];
+    const frag = document.createDocumentFragment();
+    for (let i = 0; i < 18; i++){
+      const star = document.createElement('span');
+      const tint = tints[i % tints.length];
+      star.className = tint ? `sparkle-star ${tint}` : 'sparkle-star';
+      star.style.top = Math.random() * 100 + '%';
+      star.style.left = Math.random() * 100 + '%';
+      star.style.animationDuration = (2.8 + Math.random() * 2.4).toFixed(2) + 's';
+      star.style.animationDelay = (Math.random() * 4).toFixed(2) + 's';
+      frag.appendChild(star);
+    }
+    host.appendChild(frag);
+  }
+
+  function buildDust(){
+    const host = document.querySelector('.dust');
+    if (!host || prefersReducedMotion) return;
+    const frag = document.createDocumentFragment();
+    for (let i = 0; i < 22; i++){
+      const speck = document.createElement('span');
+      speck.className = i % 2 === 0 ? 'dust--blue' : 'dust--pink';
+      const size = 18 + Math.random() * 34;
+      speck.style.width = speck.style.height = size + 'px';
+      speck.style.top = Math.random() * 100 + '%';
+      speck.style.left = Math.random() * 100 + '%';
+      speck.style.setProperty('--dust-dx', (10 + Math.random() * 22) + 'px');
+      speck.style.setProperty('--dust-dy', (10 + Math.random() * 22) + 'px');
+      speck.style.animationDuration = (8 + Math.random() * 10).toFixed(2) + 's';
+      speck.style.animationDelay = (Math.random() * 6).toFixed(2) + 's';
+      frag.appendChild(speck);
+    }
+    host.appendChild(frag);
+  }
+
+  /* ---------------------------------------------
+     Flapping butterflies (frame-sequence player)
+  --------------------------------------------- */
+  function initButterflies(){
+    if (!window.ButterflyFlap) return;
+    document.querySelectorAll('.flap-butterfly').forEach((el) => {
+      const phase = parseInt(el.dataset.phase, 10) || 0;
+      window.ButterflyFlap.mount(el, { phase });
+    });
+    const companion = document.getElementById('companionButterfly');
+    if (companion){
+      window.ButterflyFlap.mount(companion, { phase: 3 });
+    }
+  }
+
+  /* ---------------------------------------------
+     Sparkle dust trailing the companion butterfly
+  --------------------------------------------- */
+  function initSparkleTrail(){
+    if (prefersReducedMotion) return;
+    const companion = document.getElementById('companionButterfly');
+    const trail = document.getElementById('sparkleTrail');
+    if (!companion || !trail) return;
+
+    const MAX_PARTICLES = 6;
+    let alive = 0;
+
+    setInterval(() => {
+      if (alive >= MAX_PARTICLES) return;
+      const rect = companion.getBoundingClientRect();
+      if (rect.width === 0) return;
+
+      const particle = document.createElement('span');
+      particle.className = 'sparkle-particle';
+      const jitterX = (Math.random() - 0.5) * rect.width * 0.8;
+      const jitterY = (Math.random() - 0.5) * rect.height * 0.8;
+      particle.style.left = (rect.left + rect.width / 2 + jitterX) + 'px';
+      particle.style.top = (rect.top + rect.height / 2 + jitterY) + 'px';
+      particle.style.width = particle.style.height = (5 + Math.random() * 5) + 'px';
+
+      alive++;
+      particle.addEventListener('animationend', () => {
+        particle.remove();
+        alive--;
+      });
+      trail.appendChild(particle);
+    }, 500);
+  }
+
   /* ---------------------------------------------
      Countdown to 26 Sep 2026, 20:00 (America/Sao_Paulo, UTC-3)
   --------------------------------------------- */
@@ -93,6 +180,10 @@
 
   document.addEventListener('DOMContentLoaded', () => {
     buildSparkles();
+    buildStarSparkles();
+    buildDust();
+    initButterflies();
+    initSparkleTrail();
     startCountdown();
     initReveal();
     initScrollCue();
