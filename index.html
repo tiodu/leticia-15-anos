@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Letícia · XV Anos</title>
+<meta name="description" content="Convite digital para os 15 anos de Letícia — 26 de setembro de 2026, Espaço Mariah, Osasco.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@400;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Ambient layers -->
+<div class="sky" aria-hidden="true">
+  <div class="sparkles"></div>
+</div>
+
+<main class="card">
+
+  <!-- HERO -->
+  <section class="panel hero" id="hero">
+    <div class="ornament ornament--top" aria-hidden="true">
+      <img class="ornament-butterfly ornament-butterfly--1" src="assets/butterflies/borboleta-prata.png" alt="" loading="lazy">
+      <img class="ornament-butterfly ornament-butterfly--2" src="assets/butterflies/borboleta-prata.png" alt="" loading="lazy">
+    </div>
+
+    <p class="eyebrow reveal">você está convidado para</p>
+
+    <h1 class="signature reveal" data-delay="1">Letícia</h1>
+    <p class="kicker reveal" data-delay="2">XV <span class="kicker-divider">·</span> ANOS</p>
+
+    <div class="rule reveal" data-delay="3"><span class="rule-diamond"></span></div>
+
+    <p class="hero-line reveal" data-delay="4">Prestes a se tornar realidade.<br>Venha celebrar comigo!</p>
+
+    <button class="scroll-cue" id="scrollCue" type="button" aria-label="Rolar para ver os detalhes">
+      <span></span>
+    </button>
+  </section>
+
+  <!-- COUNTDOWN -->
+  <section class="panel countdown-panel" id="countdown-section">
+    <p class="eyebrow reveal">contagem regressiva</p>
+    <div class="countdown reveal" data-delay="1" id="countdown" role="timer" aria-live="off">
+      <div class="countdown-unit">
+        <span class="countdown-number" id="cd-days">00</span>
+        <span class="countdown-label">dias</span>
+      </div>
+      <div class="countdown-sep">:</div>
+      <div class="countdown-unit">
+        <span class="countdown-number" id="cd-hours">00</span>
+        <span class="countdown-label">horas</span>
+      </div>
+      <div class="countdown-sep">:</div>
+      <div class="countdown-unit">
+        <span class="countdown-number" id="cd-minutes">00</span>
+        <span class="countdown-label">min</span>
+      </div>
+      <div class="countdown-sep">:</div>
+      <div class="countdown-unit">
+        <span class="countdown-number" id="cd-seconds">00</span>
+        <span class="countdown-label">seg</span>
+      </div>
+    </div>
+    <p class="countdown-done reveal" id="countdownDone" hidden>É hoje! Nos vemos na festa ✨</p>
+  </section>
+
+  <!-- DETAILS -->
+  <section class="panel details-panel">
+
+    <div class="detail-block reveal">
+      <p class="eyebrow">quando</p>
+      <p class="detail-primary">26 <span class="detail-divider">·</span> 09 <span class="detail-divider">·</span> 2026</p>
+      <p class="detail-secondary">a partir das 20 horas</p>
+    </div>
+
+    <div class="rule reveal"><span class="rule-diamond"></span></div>
+
+    <div class="detail-block reveal">
+      <p class="eyebrow">onde</p>
+      <p class="detail-primary detail-primary--venue">Espaço Mariah</p>
+      <p class="detail-secondary">Rua Dr. Mariano Jatathy Marcondes Ferraz, 252<br>Centro — Osasco</p>
+      <a class="btn btn-ghost" href="https://maps.app.goo.gl/5TCp8JBF74yCaeKz9" target="_blank" rel="noopener">
+        <span>Ver no mapa</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z" fill="currentColor"/></svg>
+      </a>
+    </div>
+
+    <div class="rule reveal"><span class="rule-diamond"></span></div>
+
+    <div class="detail-block reveal">
+      <p class="eyebrow">traje</p>
+      <p class="detail-primary">Esporte Fino</p>
+    </div>
+
+  </section>
+
+  <!-- RSVP -->
+  <section class="panel rsvp-panel" id="rsvp">
+    <div class="ornament ornament--bottom" aria-hidden="true">
+      <img class="ornament-butterfly ornament-butterfly--3" src="assets/butterflies/borboleta-azul.png" alt="" loading="lazy">
+      <img class="ornament-butterfly ornament-butterfly--4" src="assets/butterflies/borboleta-azul.png" alt="" loading="lazy">
+    </div>
+    <p class="eyebrow reveal">confirmação</p>
+    <p class="rsvp-line reveal" data-delay="1">Sua presença é o presente<br>que mais desejo.</p>
+    <a class="btn btn-primary reveal" data-delay="2"
+       href="https://wa.me/5511995383027?text=Ol%C3%A1!%20Gostaria%20de%20confirmar%20minha%20presen%C3%A7a%20na%20festa%20de%2015%20anos%20da%20Let%C3%ADcia.%20%F0%9F%A6%8B"
+       target="_blank" rel="noopener">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.06-1.33A10 10 0 1 0 12 2Zm0 18.2a8.18 8.18 0 0 1-4.17-1.14l-.3-.18-3.1.81.83-3.02-.2-.31A8.2 8.2 0 1 1 12 20.2Zm4.52-6.13c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.13-.17.25-.65.81-.8.97-.15.17-.29.19-.54.06-.25-.12-1.04-.38-1.98-1.22-.73-.65-1.22-1.46-1.37-1.7-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.24-.42.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.4-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.86.84-.86 2.06s.88 2.39 1 2.56c.12.17 1.74 2.66 4.22 3.73.59.25 1.05.4 1.41.52.59.19 1.13.16 1.55.1.47-.07 1.47-.6 1.68-1.18.2-.58.2-1.08.14-1.18-.06-.1-.23-.16-.48-.28Z" fill="currentColor"/></svg>
+      <span>Confirmar presença</span>
+    </a>
+
+    <footer class="footer reveal" data-delay="3">
+      <p>Com carinho,</p>
+      <p class="footer-signature">Letícia</p>
+    </footer>
+  </section>
+
+</main>
+
+<script src="js/main.js"></script>
+</body>
+</html>

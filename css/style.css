@@ -1,0 +1,424 @@
+/* ============================================
+   Letícia · XV Anos — tokens
+   ============================================ */
+:root{
+  --navy-deep:   #0e1830;
+  --navy:        #172a52;
+  --navy-mid:    #2c4573;
+  --satin-hi:    #4d6ea3;
+  --silver-muted:#8fa0bf;
+  --silver:      #cdd8ec;
+  --silver-bright:#f6f8fd;
+  --glow:        #9fc4f5;
+  --gold-hair:   rgba(246,248,253,0.35);
+
+  --font-script: 'Alex Brush', cursive;
+  --font-display:'Cinzel', serif;
+  --font-body:   'Cormorant Garamond', serif;
+
+  --content-w: 30rem;
+  --ease: cubic-bezier(.22,.61,.36,1);
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0;
+  min-height:100svh;
+  font-family:var(--font-body);
+  color:var(--silver-bright);
+  background:var(--navy-deep);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+img{ max-width:100%; display:block; }
+a{ color:inherit; }
+button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; }
+
+/* ============================================
+   Satin sky backdrop
+   ============================================ */
+.sky{
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  background:
+    radial-gradient(60rem 40rem at 85% 8%,  rgba(159,196,245,0.16), transparent 60%),
+    radial-gradient(50rem 45rem at 5% 95%,  rgba(159,196,245,0.14), transparent 55%),
+    linear-gradient(155deg, var(--navy-deep) 0%, var(--navy) 32%, var(--navy-mid) 58%, var(--navy) 80%, var(--navy-deep) 100%);
+}
+.sky::after{
+  content:"";
+  position:absolute; inset:0;
+  background:repeating-linear-gradient(
+    115deg,
+    rgba(255,255,255,0.025) 0px,
+    rgba(255,255,255,0.025) 1px,
+    transparent 1px,
+    transparent 68px
+  );
+  mix-blend-mode:overlay;
+}
+.sparkles{ position:absolute; inset:0; }
+.sparkles span{
+  position:absolute;
+  width:2px; height:2px;
+  border-radius:50%;
+  background:var(--silver-bright);
+  opacity:.55;
+  animation:twinkle 4.5s ease-in-out infinite;
+}
+@keyframes twinkle{
+  0%,100%{ opacity:.15; transform:scale(1); }
+  50%{ opacity:.85; transform:scale(1.6); }
+}
+
+/* ============================================
+   Ornamental butterflies (hero + rsvp bookends only)
+   ============================================ */
+.ornament-butterfly{
+  position:absolute;
+  filter:drop-shadow(0 6px 14px rgba(0,0,0,.35));
+  opacity:0;
+  animation:
+    bf-enter 1.2s var(--ease) forwards,
+    bf-drift var(--bf-dur, 7s) ease-in-out infinite;
+  animation-delay:var(--bf-appear, 0s), var(--bf-appear, 0s);
+  will-change:transform;
+  pointer-events:none;
+}
+
+.ornament-butterfly--1{ width:72px; top:2%;  right:2%;  --bf-dur:7.5s; --bf-appear:.2s; }
+.ornament-butterfly--2{ width:34px; top:15%; right:16%; --bf-dur:6s;   --bf-appear:.6s; animation-name:bf-enter-mirror, bf-drift-mirror; }
+.ornament-butterfly--3{ width:76px; bottom:4%; left:1%;  --bf-dur:8s;   --bf-appear:.2s; filter:hue-rotate(-6deg) saturate(1.1) drop-shadow(0 0 10px rgba(80,160,255,.25)); }
+.ornament-butterfly--4{ width:32px; bottom:17%; left:14%; --bf-dur:6.5s; --bf-appear:.6s; filter:hue-rotate(-6deg) saturate(1.1) drop-shadow(0 0 10px rgba(80,160,255,.25)); animation-name:bf-enter-mirror, bf-drift-mirror; }
+
+@keyframes bf-enter{
+  from{ opacity:0; transform:translateY(14px) scale(.85); }
+  to{ opacity:.92; transform:translateY(0) scale(1); }
+}
+@keyframes bf-enter-mirror{
+  from{ opacity:0; transform:scaleX(-1) translateY(14px) scale(.85); }
+  to{ opacity:.8; transform:scaleX(-1) translateY(0) scale(1); }
+}
+@keyframes bf-drift{
+  0%,100%{ transform:translate(0,0) rotate(0deg); }
+  25%{ transform:translate(6px,-10px) rotate(-4deg); }
+  50%{ transform:translate(-4px,-4px) rotate(3deg); }
+  75%{ transform:translate(-8px,-14px) rotate(-2deg); }
+}
+@keyframes bf-drift-mirror{
+  0%,100%{ transform:scaleX(-1) translate(0,0) rotate(0deg); }
+  25%{ transform:scaleX(-1) translate(6px,-10px) rotate(-4deg); }
+  50%{ transform:scaleX(-1) translate(-4px,-4px) rotate(3deg); }
+  75%{ transform:scaleX(-1) translate(-8px,-14px) rotate(-2deg); }
+}
+
+/* ============================================
+   Layout
+   ============================================ */
+main.card{
+  position:relative;
+  max-width:var(--content-w);
+  margin:0 auto;
+  padding:0 1.5rem;
+}
+.panel{
+  position:relative;
+  overflow:hidden;
+  min-height:100svh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:4rem 0;
+}
+.countdown-panel{ min-height:auto; padding:3.5rem 0; }
+.details-panel{ min-height:auto; padding:3.5rem 0; gap:0; }
+.rsvp-panel{ min-height:100svh; }
+
+/* ============================================
+   Typography
+   ============================================ */
+.eyebrow{
+  font-family:var(--font-display);
+  font-size:.72rem;
+  letter-spacing:.32em;
+  text-transform:uppercase;
+  color:var(--silver-muted);
+  margin:0 0 .9rem;
+}
+.signature{
+  font-family:var(--font-script);
+  font-size:clamp(4.5rem, 20vw, 6.5rem);
+  line-height:1;
+  margin:0;
+  font-weight:400;
+  background:linear-gradient(100deg, var(--silver) 20%, var(--silver-bright) 40%, var(--glow) 50%, var(--silver-bright) 60%, var(--silver) 80%);
+  background-size:250% 100%;
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  animation:shimmer 6s linear infinite;
+}
+@keyframes shimmer{
+  0%{ background-position:200% 0; }
+  100%{ background-position:-50% 0; }
+}
+.kicker{
+  font-family:var(--font-display);
+  font-size:1.5rem;
+  letter-spacing:.55em;
+  margin:.6rem 0 0 .55em;
+  color:var(--silver-bright);
+  font-weight:600;
+}
+.kicker-divider{ color:var(--silver-muted); margin:0 .15em; }
+
+.rule{
+  display:flex; align-items:center; justify-content:center;
+  width:100%; max-width:14rem;
+  margin:2rem auto;
+}
+.rule::before,.rule::after{
+  content:"";
+  flex:1;
+  height:1px;
+  background:linear-gradient(90deg, transparent, var(--gold-hair));
+}
+.rule::after{ background:linear-gradient(90deg, var(--gold-hair), transparent); }
+.rule-diamond{
+  width:8px; height:8px;
+  margin:0 .9rem;
+  background:var(--silver-bright);
+  transform:rotate(45deg);
+  box-shadow:0 0 10px 1px rgba(246,248,253,.55);
+  flex-shrink:0;
+}
+
+.hero-line{
+  font-family:var(--font-body);
+  font-style:italic;
+  font-size:1.25rem;
+  line-height:1.5;
+  color:var(--silver);
+  max-width:22rem;
+  margin:0;
+}
+
+/* ============================================
+   Scroll cue
+   ============================================ */
+.scroll-cue{
+  position:absolute;
+  bottom:2.25rem;
+  left:50%;
+  transform:translateX(-50%);
+  width:26px; height:42px;
+  border:1px solid var(--silver-muted);
+  border-radius:14px;
+  opacity:.7;
+}
+.scroll-cue span{
+  position:absolute;
+  top:7px; left:50%;
+  width:4px; height:4px;
+  margin-left:-2px;
+  border-radius:50%;
+  background:var(--silver-bright);
+  animation:cue 1.8s ease-in-out infinite;
+}
+@keyframes cue{
+  0%{ opacity:1; transform:translateY(0); }
+  70%{ opacity:0; transform:translateY(14px); }
+  100%{ opacity:0; transform:translateY(14px); }
+}
+
+/* ============================================
+   Countdown
+   ============================================ */
+.countdown{
+  display:flex;
+  align-items:center;
+  gap:.6rem;
+}
+.countdown-unit{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  min-width:3.6rem;
+  padding:.7rem .3rem .6rem;
+  border:1px solid rgba(205,216,236,.25);
+  border-radius:10px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+}
+.countdown-number{
+  font-family:var(--font-display);
+  font-size:1.7rem;
+  font-weight:600;
+  color:var(--silver-bright);
+  font-variant-numeric:tabular-nums;
+}
+.countdown-label{
+  font-size:.62rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--silver-muted);
+  margin-top:.25rem;
+}
+.countdown-sep{
+  font-family:var(--font-display);
+  color:var(--silver-muted);
+  font-size:1.3rem;
+  transform:translateY(-.6rem);
+}
+.countdown-done{
+  font-family:var(--font-body);
+  font-style:italic;
+  font-size:1.15rem;
+  color:var(--silver-bright);
+  margin-top:1.2rem;
+}
+
+/* ============================================
+   Details
+   ============================================ */
+.detail-block{ padding:.5rem 0; }
+.detail-primary{
+  font-family:var(--font-display);
+  font-size:1.7rem;
+  letter-spacing:.06em;
+  margin:0;
+  color:var(--silver-bright);
+}
+.detail-primary--venue{ font-size:1.5rem; }
+.detail-divider{ color:var(--silver-muted); margin:0 .2em; }
+.detail-secondary{
+  font-family:var(--font-body);
+  font-size:1.15rem;
+  color:var(--silver);
+  line-height:1.5;
+  margin:.5rem 0 0;
+}
+
+/* ============================================
+   Buttons
+   ============================================ */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:.55rem;
+  margin-top:1.2rem;
+  padding:.85rem 1.6rem;
+  border-radius:999px;
+  font-family:var(--font-display);
+  font-size:.85rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  text-decoration:none;
+  transition:transform .25s var(--ease), box-shadow .25s var(--ease), background .25s var(--ease);
+}
+.btn:active{ transform:scale(.96); }
+
+.btn-ghost{
+  border:1px solid rgba(205,216,236,.45);
+  color:var(--silver-bright);
+  background:rgba(255,255,255,.03);
+}
+.btn-ghost:hover{ background:rgba(255,255,255,.08); border-color:var(--silver-bright); }
+
+.btn-primary{
+  background:linear-gradient(135deg, #4d6ea3, #7ea3d6);
+  color:var(--navy-deep);
+  font-weight:600;
+  box-shadow:0 0 0 0 rgba(159,196,245,.5), 0 8px 24px -6px rgba(20,40,80,.6);
+  animation:pulse-glow 2.8s ease-in-out infinite;
+}
+.btn-primary:hover{ box-shadow:0 0 0 8px rgba(159,196,245,.12), 0 10px 28px -6px rgba(20,40,80,.7); }
+@keyframes pulse-glow{
+  0%,100%{ box-shadow:0 0 0 0 rgba(159,196,245,.45), 0 8px 24px -6px rgba(20,40,80,.6); }
+  50%{ box-shadow:0 0 0 10px rgba(159,196,245,0), 0 8px 24px -6px rgba(20,40,80,.6); }
+}
+
+/* ============================================
+   RSVP + footer
+   ============================================ */
+.rsvp-line{
+  font-family:var(--font-body);
+  font-style:italic;
+  font-size:1.3rem;
+  line-height:1.5;
+  color:var(--silver);
+  max-width:20rem;
+  margin:0;
+}
+.footer{
+  margin-top:3.5rem;
+  color:var(--silver-muted);
+  font-size:.95rem;
+}
+.footer p{ margin:0; }
+.footer-signature{
+  font-family:var(--font-script);
+  font-size:2rem;
+  color:var(--silver-bright);
+  margin-top:.2rem;
+}
+
+/* ============================================
+   Ornaments (corner butterfly anchors)
+   ============================================ */
+.ornament{ position:absolute; inset:0; pointer-events:none; }
+
+/* ============================================
+   Scroll reveal
+   ============================================ */
+.reveal{
+  opacity:0;
+  transform:translateY(18px);
+  transition:opacity .8s var(--ease), transform .8s var(--ease);
+}
+.reveal.is-visible{ opacity:1; transform:translateY(0); }
+.reveal[data-delay="1"]{ transition-delay:.08s; }
+.reveal[data-delay="2"]{ transition-delay:.16s; }
+.reveal[data-delay="3"]{ transition-delay:.24s; }
+.reveal[data-delay="4"]{ transition-delay:.32s; }
+
+/* ============================================
+   Desktop (secondary target)
+   ============================================ */
+@media (min-width:640px){
+  main.card{ max-width:34rem; }
+  .signature{ font-size:7rem; }
+}
+@media (min-width:900px){
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    z-index:-3;
+    background:var(--navy-deep);
+  }
+  main.card{
+    max-width:38rem;
+    box-shadow:0 40px 120px -20px rgba(0,0,0,.6);
+  }
+}
+
+/* ============================================
+   Accessibility
+   ============================================ */
+:focus-visible{
+  outline:2px solid var(--glow);
+  outline-offset:3px;
+}
+
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+  .signature{ animation:none; background-position:0 0; }
+  .butterfly{ animation:bf-enter .6s forwards; }
+  .scroll-cue span{ animation:none; opacity:.8; }
+  .btn-primary{ animation:none; }
+  .sparkles span{ animation:none; opacity:.4; }
+  .reveal{ transition-duration:.25s; }
+}
